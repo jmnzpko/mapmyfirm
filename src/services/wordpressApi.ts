@@ -34,8 +34,8 @@ export async function getContentTypes(siteUrl: string): Promise<WordPressType[]>
   const typesData = await response.json();
 
   // Filter to only public, REST-enabled types
-  const types: WordPressType[] = Object.values(typesData).filter(
-    (type: any) => type.rest_base && type.slug !== 'attachment'
+  const types: WordPressType[] = (Object.values(typesData) as WordPressType[]).filter(
+    (type) => type.rest_base && type.slug !== 'attachment'
   );
 
   return types;

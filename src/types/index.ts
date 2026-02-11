@@ -7,7 +7,7 @@ export interface SiteNode {
   url: string;
   parent_id: string | null;
   type: string; // 'page', 'post', or CPT name
-  status: 'publish' | 'draft' | 'private';
+  status: 'publish' | 'draft' | 'private' | 'future' | 'pending';
   manual_tags: string[]; // User-applied tags: 'Location Hub', 'Practice Page', 'Ignore'
   date_modified?: string;
   content_excerpt?: string;

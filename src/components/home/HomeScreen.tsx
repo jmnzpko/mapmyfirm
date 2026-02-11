@@ -10,10 +10,6 @@ export default function HomeScreen() {
   const [importing, setImporting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleNewProject = () => {
-    navigate('/scanner');
-  };
-
   const handleImportFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;

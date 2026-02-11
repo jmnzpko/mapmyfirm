@@ -7,7 +7,6 @@ import {
   PracticeAreaType
 } from '../../services/checklistGenerator';
 import { exportChecklistToCSV, downloadProject } from '../../services/exportImport';
-import { findNodeInList } from '../../services/treeBuilder';
 import PracticeAreaCell from './PracticeAreaCell';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -338,8 +337,6 @@ export default function ChecklistScreen() {
               </thead>
               <tbody>
                 {filteredItems.map(item => {
-                  const hub = item.hub_id ? findNodeInList(state.nodes, item.hub_id) : null;
-
                   // Count how many practice areas exist
                   const existCount = PRACTICE_AREAS.filter(area =>
                     item.practice_areas[area].exists

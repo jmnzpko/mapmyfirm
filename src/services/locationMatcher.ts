@@ -148,7 +148,7 @@ export function matchLocations(
 
     if (results.length > 0 && results[0].score !== undefined) {
       const bestMatch = results[0];
-      const confidence = (1 - bestMatch.score) * 100;
+      const confidence = (1 - (bestMatch.score ?? 0)) * 100;
 
       return {
         id: uuidv4(),
@@ -203,7 +203,7 @@ export function findBestMatch(
   });
 
   return {
-    hubId: bestHub?.id || null,
+    hubId: (bestHub as SiteNode | null)?.id || null,
     confidence: Math.round(bestScore)
   };
 }
