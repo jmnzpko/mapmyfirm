@@ -8,7 +8,7 @@ import {
   ChecklistItem,
   LocationStructure
 } from '../types';
-import { saveProject, getCurrentProjectId, setCurrentProjectId } from '../services/supabaseStorage';
+import { saveProject, getCurrentProjectId, setCurrentProjectId, clearCurrentProjectId } from '../services/supabaseStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 // Initial state
@@ -343,8 +343,11 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     importProject: (projectState: ProjectState) =>
       dispatch({ type: 'IMPORT_PROJECT', payload: projectState }),
 
-    resetProject: () =>
-      dispatch({ type: 'RESET_PROJECT' }),
+    resetProject: () => {
+      dispatch({ type: 'RESET_PROJECT' });
+      setCurrentProjectIdState(null);
+      clearCurrentProjectId();
+    },
 
     setTreeExpanded: (ids: string[]) =>
       dispatch({ type: 'SET_TREE_EXPANDED', payload: ids }),
