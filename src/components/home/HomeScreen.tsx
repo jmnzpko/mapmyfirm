@@ -90,7 +90,7 @@ export default function HomeScreen() {
 
         {/* Footer */}
         <p className="text-center text-gray-500 text-sm mt-8">
-          Made with care by WEBRIS • All projects are saved locally in your browser
+          Made with care by WEBRIS • All projects are securely saved to your account
         </p>
       </div>
     </div>

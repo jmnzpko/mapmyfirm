@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useProject } from '../../context/ProjectContext';
-import { getAllProjects, deleteProject, loadProject, SavedProject, clearCurrentProjectId } from '../../services/indexedDB';
+import { getAllProjects, deleteProject, loadProject, SavedProject, clearCurrentProjectId } from '../../services/supabaseStorage';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ProjectManager() {
   const navigate = useNavigate();
   const { importProject, resetProject, setProjectId } = useProject();
+  const { signOut } = useAuth();
   const [projects, setProjects] = useState<SavedProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
@@ -106,12 +108,24 @@ export default function ProjectManager() {
             {projects.length === 0 ? 'No saved projects yet' : `${projects.length} saved project${projects.length > 1 ? 's' : ''}`}
           </p>
         </div>
-        <button onClick={handleNewProject} className="btn-primary">
-          <svg className="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-          </svg>
-          New Project
-        </button>
+        <div className="flex items-center space-x-3">
+          <button onClick={handleNewProject} className="btn-primary">
+            <svg className="w-5 h-5 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+            New Project
+          </button>
+          <button
+            onClick={() => signOut()}
+            className="btn-secondary text-sm"
+            title="Sign out"
+          >
+            <svg className="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            Sign Out
+          </button>
+        </div>
       </div>
 
       {/* Projects Grid */}

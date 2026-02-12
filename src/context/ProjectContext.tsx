@@ -8,7 +8,7 @@ import {
   ChecklistItem,
   LocationStructure
 } from '../types';
-import { saveProject, getCurrentProjectId, setCurrentProjectId } from '../services/indexedDB';
+import { saveProject, getCurrentProjectId, setCurrentProjectId } from '../services/supabaseStorage';
 import { v4 as uuidv4 } from 'uuid';
 
 // Initial state
